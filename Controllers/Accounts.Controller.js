@@ -1,0 +1,30 @@
+import { AccountsService } from '../Services/Domain.Service/Accounts.Service';
+const constants = require("../Services/Common.Services/Constants");
+
+export class AccountsController {
+    #message = null;
+    #service = null;
+
+    constructor(message) {
+        this.#message = message;
+        this.#service = new AccountsService(message);
+    }
+
+    async handleRequest() {
+        try {
+            switch (this.#message.action) {
+                case constants.AccountsRequestSubTypes.CREATE_FOOD_PROCESSOR:
+                    return await this.#service.createFoodProcessor();
+                    break;
+                case constants.AccountsRequestSubTypes.IS_ACCOUNT_EXIST:
+                    return await this.#service.isAccountExist();
+                    break;   
+                default:
+                    break;
+            }
+
+        } catch (error) {
+            return { error: error };
+        }
+    }
+}
