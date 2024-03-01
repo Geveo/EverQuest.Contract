@@ -74,7 +74,7 @@ export class AccountsService {
         let resObj = {};
 
         let filter = {
-            public_Key: this.#message.data.public_Key,
+            public_Key: this.#message.data.Public_Key,
             XRP_Address: this.#message.data.XRP_Address,
         }
         try {
