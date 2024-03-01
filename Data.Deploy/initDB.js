@@ -122,19 +122,19 @@ export class DBInitializer {
                 INSERT INTO Account (Public_Key, XRP_Address, Role) VALUES
                     ('EDA1347944A87E22DAD2ED8BE01C4F8F7D14F82044A6708C73164F21F9758A3E34', 'rGFTDgKKqVLochqEC9M6Zfwq9kKP586wME', 'Admin'),
                     ('EDEC15B6D03FB9F2792B04D5F42FE63AC432166C9761DE42D617BDE1476DFCF0F6', 'rhVQZNYAG42AkZ7faWuo8peQayyJPLAGHQ', 'Player'),
-                    ('ED17C57889B433BFD5D6C5326EF3234BBCFBFF3192F2FD5B9F8F6EDC42EB730E27', 'rGLBFm3HUjxGNfWAGiCXQLFB9uGACZ5pd2', 'Player'),
+                    ('ED17C57889B433BFD5D6C5326EF3234BBCFBFF3192F2FD5B9F8F6EDC42EB730E27', 'rGLBFm3HUjxGNfWAGiCXQLFB9uGACZ5pd2', 'Player');
                     
             `);
 
             await this.#runQuery(`
                 INSERT INTO Admin (XRP_Address, Name) VALUES
-                    ('rGFTDgKKqVLochqEC9M6Zfwq9kKP586wME', 'Admin1'),
+                    ('rGFTDgKKqVLochqEC9M6Zfwq9kKP586wME', 'Admin1');
             `);
 
             await this.#runQuery(`
                 INSERT INTO Player (XRP_Address, Name) VALUES
                     ('rhVQZNYAG42AkZ7faWuo8peQayyJPLAGHQ', 'Player 1'),
-                    ('rGLBFm3HUjxGNfWAGiCXQLFB9uGACZ5pd2', 'Player 2'),
+                    ('rGLBFm3HUjxGNfWAGiCXQLFB9uGACZ5pd2', 'Player 2');
             `);
 
 
