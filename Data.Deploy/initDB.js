@@ -29,14 +29,14 @@ export class DBInitializer {
                 CreatedOn INTEGER,
                 LastUpdatedOn INTEGER,
                 PRIMARY KEY("Id" AUTOINCREMENT)
-            )`);
+            );`);
 
             // Create table Accounts
             await this.#runQuery(`CREATE TABLE IF NOT EXISTS Account (
                 XRP_Address TEXT PRIMARY KEY NOT NULL,
                 Public_Key TEXT NOT NULL,
                 Role TEXT NOT NULL
-            )`);
+            );`);
 
             // Create table Admin
             await this.#runQuery(`CREATE TABLE IF NOT EXISTS Admin (
@@ -120,21 +120,23 @@ export class DBInitializer {
 
             await this.#runQuery(`
                 INSERT INTO Account (Public_Key, XRP_Address, Role) VALUES
-                    ('EDA1347944A87E22DAD2ED8BE01C4F8F7D14F82044A6708C73164F21F9758A3E34', 'rGFTDgKKqVLochqEC9M6Zfwq9kKP586wME', 'Admin'),
-                    ('EDEC15B6D03FB9F2792B04D5F42FE63AC432166C9761DE42D617BDE1476DFCF0F6', 'rhVQZNYAG42AkZ7faWuo8peQayyJPLAGHQ', 'Player'),
-                    ('ED17C57889B433BFD5D6C5326EF3234BBCFBFF3192F2FD5B9F8F6EDC42EB730E27', 'rGLBFm3HUjxGNfWAGiCXQLFB9uGACZ5pd2', 'Player');
+                    ('03D7638D441412B64E3510BC1A25BEC80D5C2D65322F9F4D97D98D316698120EB5', 'rm2yHK71c5PNnS8JdFbYf29H3YDEa5Y6y', 'Admin'),
+                    ('02731C3664C496F1EFCF664A3C8A155471B7484B848B55E24088DAFF0FBB424533', 'rEALPVCk8pwkDLJemLQd4TN3hrphTZWdJY', 'Player'),
+                    ('02F1BD525C710423382AEA14E33BC340D0445D14A1B9547D688445867BF2CEEBD8', 'rHMqT7UtJigHFGayDQPakyLFZRMaoQsvT9', 'Player'),
+                    ('02B8E8771FDD4515E0F2319E4D67172A2BF0CB94C7A07426A775AE30D4A651BD1E', 'rUm7vyyTs4yNpKfFqcRhHa9edDkoDnNKnR', 'Player');
                     
             `);
 
             await this.#runQuery(`
                 INSERT INTO Admin (XRP_Address, Name) VALUES
-                    ('rGFTDgKKqVLochqEC9M6Zfwq9kKP586wME', 'Admin1');
+                    ('rm2yHK71c5PNnS8JdFbYf29H3YDEa5Y6y', 'Admin1');
             `);
 
             await this.#runQuery(`
                 INSERT INTO Player (XRP_Address, Name) VALUES
-                    ('rhVQZNYAG42AkZ7faWuo8peQayyJPLAGHQ', 'Player 1'),
-                    ('rGLBFm3HUjxGNfWAGiCXQLFB9uGACZ5pd2', 'Player 2');
+                    ('rEALPVCk8pwkDLJemLQd4TN3hrphTZWdJY', 'Player 1'),
+                    ('rHMqT7UtJigHFGayDQPakyLFZRMaoQsvT9', 'Player 2'),
+                    ('rUm7vyyTs4yNpKfFqcRhHa9edDkoDnNKnR', 'Player 2');
             `);
 
 
