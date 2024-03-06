@@ -40,7 +40,7 @@ export class DBInitializer {
 
             // Create table Admin
             await this.#runQuery(`CREATE TABLE IF NOT EXISTS Admin (
-                Admin_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                Admin_ID INTEGER PRIMARY KEY,
                 XRP_Address TEXT NOT NULL,
                 Name TEXT NOT NULL,
                 FOREIGN KEY (XRP_Address) REFERENCES Account(XRP_Address)
@@ -48,7 +48,7 @@ export class DBInitializer {
 
             // Create table Consumer
             await this.#runQuery(`CREATE TABLE IF NOT EXISTS Player (
-                Player_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                Player_ID INTEGER PRIMARY KEY,
                 XRP_Address TEXT NOT NULL,
                 Name TEXT NOT NULL,
                 FOREIGN KEY (XRP_Address) REFERENCES Account(XRP_Address)
@@ -128,15 +128,15 @@ export class DBInitializer {
             `);
 
             await this.#runQuery(`
-                INSERT INTO Admin (XRP_Address, Name) VALUES
-                    ('rm2yHK71c5PNnS8JdFbYf29H3YDEa5Y6y', 'Admin1');
+                INSERT INTO Admin (Admin_ID, XRP_Address, Name) VALUES
+                    (10000, 'rm2yHK71c5PNnS8JdFbYf29H3YDEa5Y6y', 'Admin1');
             `);
 
             await this.#runQuery(`
-                INSERT INTO Player (XRP_Address, Name) VALUES
-                    ('rEALPVCk8pwkDLJemLQd4TN3hrphTZWdJY', 'Player 1'),
-                    ('rHMqT7UtJigHFGayDQPakyLFZRMaoQsvT9', 'Player 2'),
-                    ('rUm7vyyTs4yNpKfFqcRhHa9edDkoDnNKnR', 'Player 2');
+                INSERT INTO Player (Player_ID, XRP_Address, Name) VALUES
+                    (10001, 'rEALPVCk8pwkDLJemLQd4TN3hrphTZWdJY', 'Player 1'),
+                    (10002, 'rHMqT7UtJigHFGayDQPakyLFZRMaoQsvT9', 'Player 2'),
+                    (10003, 'rUm7vyyTs4yNpKfFqcRhHa9edDkoDnNKnR', 'Player 3');
             `);
 
 
