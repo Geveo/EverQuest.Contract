@@ -95,5 +95,32 @@ export class AccountsService {
             this.#dbContext.close();
         }
     }
+
+    async GetPlayerID() {
+        let resObj = {};
+
+        let filter = {
+            Public_Key: this.#message.data.Public_Key,
+            XRP_Address: this.#message.data.XRP_Address,
+        }
+        try {
+            this.#dbContext.open();
+            let rows = await this.#dbContext.getValues("Account", filter);
+
+            if (rows.length > 0) {
+                resObj.success = true;
+                resObj.Player_ID = rows.Player_ID
+            }
+            else {
+                resObj.success = false;
+            }
+
+            return resObj;
+        } catch (error) {
+            throw error;
+        } finally {
+            this.#dbContext.close();
+        }
+    }
 }
 

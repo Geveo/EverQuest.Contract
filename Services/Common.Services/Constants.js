@@ -10,6 +10,7 @@ const RequestTypes = {
 
 const AccountsRequestSubTypes = { 
     IS_ACCOUNT_EXIST: "IsAccountExist",
+    GET_PLAYER_ID = "GetPlayerID",
     CREATE_ADMIN: "CreateAdmin", 
     DELETE_ADMIN: "DeleteAdmin", 
     UPDATE_ADMIN: "UpdateAdmin", 

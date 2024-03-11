@@ -18,7 +18,10 @@ export class AccountsController {
                     break;
                 case constants.AccountsRequestSubTypes.IS_ACCOUNT_EXIST:
                     return await this.#service.isAccountExist();
-                    break;   
+                    break;
+                case constants.AccountsRequestSubTypes.GET_PLAYER_ID:
+                    return await this.#service.GetPlayerID();
+                    break; 
                 default:
                     break;
             }
