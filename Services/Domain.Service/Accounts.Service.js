@@ -122,5 +122,62 @@ export class AccountsService {
             this.#dbContext.close();
         }
     }
+
+    async AddTransactionRecord() {
+        let resObj = {};
+
+        try {
+            this.#dbContext.open();
+
+            const fundTranferData = {
+                Player_ID: this.#message.data.Player_ID,
+                Transaction_Date: new Date().toISOString(),
+                Description: this.#message.data.Description,
+                Amount: this.#message.data.Amount,
+            };
+
+            const transaction_ID = (await this.#dbContext.insertValue("Funds_Transactions", fundTranferData)).lastId;
+
+            if (transaction_ID > 0) {
+                resObj.success = { transaction_ID: transaction_ID };
+            }
+            else {
+                resObj.success = { transaction_ID: 0 };
+            }
+            return resObj;
+        } catch (error) {
+            throw error;
+        } finally {
+            this.#dbContext.close();
+        }
+    }
+
+    async GetTransactionHistory() {
+        let resObj = {};
+
+        let filter = {
+            Player_ID: this.#message.data.Player_ID,
+        }
+        try {
+            this.#dbContext.open();
+            let rows = await this.#dbContext.getValues("Funds_Transactions ", filter);
+
+            if (rows.length > 0) {
+                resObj.success = true;
+                resObj.data = rows;
+            }
+            else {
+                resObj.success = false;
+            }
+
+            return resObj;
+
+        } catch (error) {
+            throw error;
+        } finally {
+            this.#dbContext.close();
+        }
+    }
+
 }
 

@@ -19,6 +19,7 @@ export class DBInitializer {
             await this.#runQuery(`DROP TABLE IF EXISTS Certification_Type;`);
             await this.#runQuery(`DROP TABLE IF EXISTS Certification;`);
             await this.#runQuery(`DROP TABLE IF EXISTS External_Suppliers;`);
+            await this.#runQuery(`DROP TABLE IF EXISTS Funds_Transactions;`);
 
 
             // Create table ContractVersion
@@ -52,6 +53,16 @@ export class DBInitializer {
                 XRP_Address TEXT NOT NULL,
                 Name TEXT NOT NULL,
                 FOREIGN KEY (XRP_Address) REFERENCES Account(XRP_Address)
+            );`);
+
+            // Create table Funds_Transactions
+            await this.#runQuery(`CREATE TABLE IF NOT EXISTS Funds_Transactions (
+                Transaction_ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                Player_ID INTEGER NOT NULL,
+                Transaction_Date DATETIME  NOT NULL,
+                Description TEXT,
+                Amount DECIMAL(10, 2) NOT NULL,
+                FOREIGN KEY (Player_ID) REFERENCES Account(Player_ID)
             );`);
 
             // Create table FoodProcessor
