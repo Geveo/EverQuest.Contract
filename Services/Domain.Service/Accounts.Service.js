@@ -105,14 +105,13 @@ export class AccountsService {
         console.log("Getting player id: ", filter);
         try {
             this.#dbContext.open();
-            let rows = await this.#dbContext.getValues("Account", filter);
+            let rows = await this.#dbContext.getValues("Player", filter);
 
             if (rows.length > 0) {
-                resObj.success = true;
-                resObj.Player_ID = rows.Player_ID
+                resObj.success = rows.Player_ID;
             }
             else {
-                resObj.success = false;
+                resObj.success = 0;
             }
             console.log("Player id: ", resObj);
             return resObj;
@@ -140,10 +139,10 @@ export class AccountsService {
             const transaction_ID = (await this.#dbContext.insertValue("Funds_Transactions", fundTranferData)).lastId;
 
             if (transaction_ID > 0) {
-                resObj.success = { transaction_ID: transaction_ID };
+                resObj.success = true;
             }
             else {
-                resObj.success = { transaction_ID: 0 };
+                resObj.success = false;
             }
             console.log("Created transaction: ", resObj);
             return resObj;
