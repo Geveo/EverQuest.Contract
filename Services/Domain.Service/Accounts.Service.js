@@ -108,7 +108,7 @@ export class AccountsService {
             let rows = await this.#dbContext.getValues("Player", filter);
 
             if (rows.length > 0) {
-                resObj.success = rows.Player_ID;
+                resObj.success = rows[0].Player_ID;
             }
             else {
                 resObj.success = 0;
