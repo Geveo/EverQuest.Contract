@@ -76,6 +76,7 @@ export class AccountsService {
         let filter = {
             XRP_Address: this.#message.data.XRP_Address,
         }
+        console.log("Checking user has an account: ", filter);
         try {
             this.#dbContext.open();
             let rows = await this.#dbContext.getValues("Account", filter);
@@ -86,7 +87,7 @@ export class AccountsService {
             else {
                 resObj.success = false;
             }
-
+            console.log("Has acount: ", resObj);
             return resObj;
         } catch (error) {
             throw error;
@@ -99,9 +100,9 @@ export class AccountsService {
         let resObj = {};
 
         let filter = {
-            Public_Key: this.#message.data.Public_Key,
             XRP_Address: this.#message.data.XRP_Address,
         }
+        console.log("Getting player id: ", filter);
         try {
             this.#dbContext.open();
             let rows = await this.#dbContext.getValues("Account", filter);
@@ -113,8 +114,9 @@ export class AccountsService {
             else {
                 resObj.success = false;
             }
-
+            console.log("Player id: ", resObj);
             return resObj;
+
         } catch (error) {
             throw error;
         } finally {
@@ -134,7 +136,7 @@ export class AccountsService {
                 Description: this.#message.data.Description,
                 Amount: this.#message.data.Amount,
             };
-
+            console.log("Creating a transaction record: ", fundTranferData);
             const transaction_ID = (await this.#dbContext.insertValue("Funds_Transactions", fundTranferData)).lastId;
 
             if (transaction_ID > 0) {
@@ -143,6 +145,7 @@ export class AccountsService {
             else {
                 resObj.success = { transaction_ID: 0 };
             }
+            console.log("Created transaction: ", resObj);
             return resObj;
         } catch (error) {
             throw error;
@@ -157,6 +160,7 @@ export class AccountsService {
         let filter = {
             Player_ID: this.#message.data.Player_ID,
         }
+        console.log("Getting transaction record: ", filter);
         try {
             this.#dbContext.open();
             let rows = await this.#dbContext.getValues("Funds_Transactions ", filter);
@@ -168,7 +172,7 @@ export class AccountsService {
             else {
                 resObj.success = false;
             }
-
+            console.log("Transaction record: ", resObj);
             return resObj;
 
         } catch (error) {
