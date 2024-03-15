@@ -135,9 +135,12 @@ export class AccountsService {
                 Transaction_Date: new Date().toISOString(),
                 URI_Token_Index: this.#message.data.URI_Token_Index,
                 Amount: this.#message.data.Amount,
+                Transaction_Status: "JOINED"
             };
+
+            var fundTranferDataList = [fundTranferData]
             console.log("Creating a transaction record: ", fundTranferData);
-            const transaction_ID = (await this.#dbContext.insertValuesWithParams("Funds_Transactions", fundTranferData)).lastId;
+            const transaction_ID = (await this.#dbContext.insertValuesWithParams("Funds_Transactions", fundTranferDataList)).lastId;
 
             if (transaction_ID > 0) {
                 resObj.success = true;
@@ -174,6 +177,35 @@ export class AccountsService {
                 resObj.success = false;
             }
             console.log("Transaction record: ", resObj);
+            return resObj;
+
+        } catch (error) {
+            throw error;
+        } finally {
+            this.#dbContext.close();
+        }
+    }
+
+    async GetTransactionStatus() {
+        let resObj = {};
+
+        let filter = {
+            Player_ID: this.#message.data.Player_ID,
+            Game_ID: this.#message.data.Game_ID,
+        }
+        console.log("Getting transaction status: ", filter);
+        try {
+            this.#dbContext.open();
+            let rows = await this.#dbContext.getValues("Funds_Transactions ", filter);
+
+            if (rows.length > 0) {
+                resObj.success = true;
+                resObj.data = rows[0].Transaction_Status;
+            }
+            else {
+                resObj.success = false;
+            }
+            console.log("Transaction Status: ", resObj);
             return resObj;
 
         } catch (error) {

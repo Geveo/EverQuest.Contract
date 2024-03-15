@@ -213,37 +213,32 @@ class SqliteDatabase {
         console.log(values);
         if (!this.db)
             throw 'Database connection is not open.';
-    
+
         if (values.length) {
             const columnNames = Object.keys(values[0]);
-            console.log(columnNames);
-    
+            console.log(columnNames)
+
             let rowValueStr = '';
+            let rowValues = [];
             for (const val of values) {
-                const valueStr = columnNames.map(columnName => {
-                    const value = val[columnName];
-                    if (typeof value === 'string') {
-                        // For strings, enclose the value in single quotes and escape existing single quotes.
-                        return `'${value.replace(/'/g, "''")}'`; 
-                    } else if (value instanceof Date) {
-                        // For Date objects, convert to ISO string and quote.
-                        return `'${value.toISOString()}'`;
+                rowValueStr += '(';
+                for (const columnName of columnNames) {
+                    let value = val[columnName];
+                    // Format value if it's a string or a date
+                    if (typeof value === 'string' || value instanceof Date) {
+                        value = `'${value}'`;
                     } else if (value === null || value === undefined) {
-                        // Handle null and undefined as SQL NULL.
-                        return 'NULL';
-                    } else {
-                        // For other types, use the value directly.
-                        return value;
+                        value = 'NULL';
                     }
-                }).join(', ');
-    
-                rowValueStr += `(${valueStr}),`;
+                    rowValueStr += (`${value},`);
+                }
+                rowValueStr = rowValueStr.slice(0, -1) + '),';
             }
-            rowValueStr = rowValueStr.slice(0, -1); // Remove the last comma.
-    
-            const query = `INSERT INTO ${tableName} (${columnNames.join(', ')}) VALUES ${rowValueStr};`;
+            rowValueStr = rowValueStr.slice(0, -1);
+
+            const query = `INSERT INTO ${tableName}(${columnNames.join(', ')}) VALUES ${rowValueStr};`;
             console.log(query);
-    
+
             return (await this.runQuery(query));
         }
     }

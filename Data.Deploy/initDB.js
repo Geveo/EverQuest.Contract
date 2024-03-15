@@ -63,6 +63,7 @@ export class DBInitializer {
                 Transaction_Date TEXT  NOT NULL,
                 URI_Token_Index TEXT NOT NULL,
                 Amount TEXT NOT NULL,
+                Transaction_Status TEXT NOT NULL,
                 FOREIGN KEY (Player_ID) REFERENCES Player(Player_ID)
             );`);
 
