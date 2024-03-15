@@ -209,6 +209,48 @@ class SqliteDatabase {
         }
     }
 
+    async insertValuesWithParams(tableName, values) {
+        console.log(values);
+        if (!this.db)
+            throw 'Database connection is not open.';
+    
+        if (values.length) {
+            const columnNames = Object.keys(values[0]);
+            console.log(columnNames);
+    
+            let rowValueStr = '';
+            for (const val of values) {
+                const valueStr = columnNames.map(columnName => {
+                    const value = val[columnName];
+                    if (typeof value === 'string') {
+                        // For strings, enclose the value in single quotes and escape existing single quotes.
+                        return `'${value.replace(/'/g, "''")}'`; 
+                    } else if (value instanceof Date) {
+                        // For Date objects, convert to ISO string and quote.
+                        return `'${value.toISOString()}'`;
+                    } else if (value === null || value === undefined) {
+                        // Handle null and undefined as SQL NULL.
+                        return 'NULL';
+                    } else {
+                        // For other types, use the value directly.
+                        return value;
+                    }
+                }).join(', ');
+    
+                rowValueStr += `(${valueStr}),`;
+            }
+            rowValueStr = rowValueStr.slice(0, -1); // Remove the last comma.
+    
+            const query = `INSERT INTO ${tableName} (${columnNames.join(', ')}) VALUES ${rowValueStr};`;
+            console.log(query);
+    
+            // Execute the query using your database connection. 
+            // This example does not include the actual execution logic, as it depends on your DB library.
+            // return (await this.runQuery(query));
+        }
+    }
+    
+
     async deleteValues(tableName, filter = null) {
         if (!this.db)
             throw 'Database connection is not open.';

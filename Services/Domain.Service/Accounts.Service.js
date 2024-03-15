@@ -137,7 +137,7 @@ export class AccountsService {
                 Amount: this.#message.data.Amount,
             };
             console.log("Creating a transaction record: ", fundTranferData);
-            const transaction_ID = (await this.#dbContext.insertValue("Funds_Transactions", fundTranferData)).lastId;
+            const transaction_ID = (await this.#dbContext.insertValuesWithParams("Funds_Transactions", fundTranferData)).lastId;
 
             if (transaction_ID > 0) {
                 resObj.success = true;
@@ -159,6 +159,7 @@ export class AccountsService {
 
         let filter = {
             Player_ID: this.#message.data.Player_ID,
+            Game_ID: this.#message.data.Game_ID,
         }
         console.log("Getting transaction record: ", filter);
         try {
