@@ -132,7 +132,7 @@ export class AccountsService {
             const fundTranferData = {
                 Player_ID: this.#message.data.Player_ID,
                 Game_ID: this.#message.data.Game_ID,
-                Transaction_Date: new Date(),
+                Transaction_Date: new Date().toISOString(),
                 URI_Token_Index: this.#message.data.URI_Token_Index,
                 Amount: this.#message.data.Amount,
             };

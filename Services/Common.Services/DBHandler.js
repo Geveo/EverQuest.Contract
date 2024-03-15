@@ -202,7 +202,7 @@ class SqliteDatabase {
             }
             rowValueStr = rowValueStr.slice(0, -1);
 
-            const query = `INSERT INTO ${tableName}(${columnNames.join(', ')}) VALUES ${rowValueStr}`;
+            const query = `INSERT INTO ${tableName}(${columnNames.join(', ')}) VALUES ${rowValueStr};`;
             console.log(query)
             console.log(rowValues)
             return (await this.runQuery(query, rowValues));

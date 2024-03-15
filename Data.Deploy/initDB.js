@@ -60,7 +60,7 @@ export class DBInitializer {
                 Transaction_ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
                 Player_ID INTEGER NOT NULL,
                 Game_ID INTEGER NOT NULL,
-                Transaction_Date DATETIME  NOT NULL,
+                Transaction_Date TEXT  NOT NULL,
                 URI_Token_Index TEXT NOT NULL,
                 Amount TEXT NOT NULL,
                 FOREIGN KEY (Player_ID) REFERENCES Player(Player_ID)
