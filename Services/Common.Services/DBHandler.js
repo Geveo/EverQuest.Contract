@@ -244,9 +244,7 @@ class SqliteDatabase {
             const query = `INSERT INTO ${tableName} (${columnNames.join(', ')}) VALUES ${rowValueStr};`;
             console.log(query);
     
-            // Execute the query using your database connection. 
-            // This example does not include the actual execution logic, as it depends on your DB library.
-            // return (await this.runQuery(query));
+            return (await this.runQuery(query));
         }
     }
     
