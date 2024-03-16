@@ -238,8 +238,9 @@ class SqliteDatabase {
 
             const query = `INSERT INTO ${tableName}(${columnNames.join(', ')}) VALUES ${rowValueStr};`;
             console.log(query);
-
-            return (await this.runQuery(query));
+            const result = await this.runQuery(query);
+            console.log("LastID: ", result.lastId)
+            return (result);
         }
     }
     
@@ -264,9 +265,11 @@ class SqliteDatabase {
     }
 
     runQuery(query, params = null) {
+        console.log("Executing query: ", query);
         return new Promise((resolve, reject) => {
             this.db.run(query, params ? params : [], function (err) {
                 if (err) {
+                    console.log("Error: ", err);
                     reject(err);
                     return;
                 }
