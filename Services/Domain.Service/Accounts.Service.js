@@ -137,10 +137,8 @@ export class AccountsService {
                 Amount: this.#message.data.Amount,
                 Transaction_Status: "JOINED"
             };
-
-            var fundTranferDataList = [fundTranferData]
             console.log("Creating a transaction record: ", fundTranferData);
-            const transaction_ID = (await this.#dbContext.insertValuesWithParams("Funds_Transactions", fundTranferDataList)).lastId;
+            const transaction_ID = (await this.#dbContext.insertValuesWithParams("Funds_Transactions", [fundTranferData])).lastId;
 
             if (transaction_ID > 0) {
                 resObj.success = true;
