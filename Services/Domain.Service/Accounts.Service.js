@@ -156,6 +156,39 @@ export class AccountsService {
         }
     }
 
+    async UpdateTransactionRecord() {
+        let resObj = {};
+
+        try {
+            this.#dbContext.open();
+
+            const filter = {
+                Player_ID: this.#message.data.Player_ID,
+                Game_ID: this.#message.data.Game_ID,
+            };
+
+            const updateTransactionRecord = 
+            { Transaction_Status: this.#message.Transaction_Status }
+
+            console.log("Updating the transaction record: ", filter);
+
+            const transaction_ID = (await this.#dbContext.updateValue("Funds_Transactions", updateTransactionRecord, filter)).lastId;
+
+            if (transaction_ID > 0) {
+                resObj.success = true;
+            }
+            else {
+                resObj.success = false;
+            }
+            console.log("Updated transaction: ", resObj);
+            return resObj;
+        } catch (error) {
+            throw error;
+        } finally {
+            this.#dbContext.close();
+        }
+    }
+
     async GetTransactionHistory() {
         let resObj = {};
 
