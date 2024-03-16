@@ -139,9 +139,9 @@ export class AccountsService {
             };
             console.log("Creating a transaction record: ", fundTranferData);
             var fundTranfers = [fundTranferData];
-            const transaction_ID = (await this.#dbContext.insertValuesWithParams("Funds_Transactions", fundTranfers)).lastId;
+            const changes = (await this.#dbContext.insertValuesWithParams("Funds_Transactions", fundTranfers)).changes;
 
-            if (transaction_ID > 0) {
+            if (changes > 0) {
                 resObj.success = true;
             }
             else {

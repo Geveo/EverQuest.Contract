@@ -17,7 +17,7 @@ class SqliteDatabase {
         // If a connection is already open increase the connection count.
         // This guarantees only one connection is open even if open() is called before closing the previous connections. 
         if (this.openConnections <= 0) {
-            this.db = new sqlite3.Database(this.dbFile);
+            this.db = new sqlite3.Database(this.dbFile, sqlite3.OPEN_READWRITE);
             this.openConnections = 1;
         }
         else

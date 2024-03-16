@@ -57,7 +57,6 @@ export class DBInitializer {
 
             // Create table Funds_Transactions
             await this.#runQuery(`CREATE TABLE IF NOT EXISTS Funds_Transactions (
-                Transaction_ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
                 Player_ID INTEGER NOT NULL,
                 Game_ID INTEGER NOT NULL,
                 Transaction_Date TEXT  NOT NULL,
