@@ -266,6 +266,7 @@ class SqliteDatabase {
 
     runQuery(query, params = null) {
         console.log("Executing query: ", query);
+        console.log("DB: ", this.db);
         return new Promise((resolve, reject) => {
             this.db.run(query, params ? params : [], function (err) {
                 if (err) {
