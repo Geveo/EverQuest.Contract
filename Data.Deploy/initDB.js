@@ -135,8 +135,11 @@ export class DBInitializer {
                     ('03D7638D441412B64E3510BC1A25BEC80D5C2D65322F9F4D97D98D316698120EB5', 'rm2yHK71c5PNnS8JdFbYf29H3YDEa5Y6y', 'Admin'),
                     ('02731C3664C496F1EFCF664A3C8A155471B7484B848B55E24088DAFF0FBB424533', 'rEALPVCk8pwkDLJemLQd4TN3hrphTZWdJY', 'Player'),
                     ('02F1BD525C710423382AEA14E33BC340D0445D14A1B9547D688445867BF2CEEBD8', 'rHMqT7UtJigHFGayDQPakyLFZRMaoQsvT9', 'Player'),
-                    ('02B8E8771FDD4515E0F2319E4D67172A2BF0CB94C7A07426A775AE30D4A651BD1E', 'rUm7vyyTs4yNpKfFqcRhHa9edDkoDnNKnR', 'Player');
-                    
+                    ('02B8E8771FDD4515E0F2319E4D67172A2BF0CB94C7A07426A775AE30D4A651BD1E', 'rUm7vyyTs4yNpKfFqcRhHa9edDkoDnNKnR', 'Player'),
+                    ('02B8E8771FDD4515E0F2319E4D67172A2BF0CB94C7A07426A775AE30D4A651BD1E', 'rGatWop2JKuD9seKnLjoBvJRSS81ye6NJ3', 'Player'),
+                    ('02B8E8771FDD4515E0F2319E4D67172A2BF0CB94C7A07426A775AE30D4A651BD1E', 'rGKzjS2ichPAA37qAjJfkPB4KcGC8XuDo1', 'Player'),
+                    ('02B8E8771FDD4515E0F2319E4D67172A2BF0CB94C7A07426A775AE30D4A651BD1E', 'rLFk3DTmGN4rSSqBkqpQyu7gXaFWVeXNFW', 'Player'),
+                    ('02B8E8771FDD4515E0F2319E4D67172A2BF0CB94C7A07426A775AE30D4A651BD1E', 'rG4HDrfn5SGS4P9S5Bpu411iRjQbZdK79H', 'Player');   
             `);
 
             await this.#runQuery(`
@@ -146,9 +149,13 @@ export class DBInitializer {
 
             await this.#runQuery(`
                 INSERT INTO Player (Player_ID, XRP_Address, Name) VALUES
-                    (10001, 'rEALPVCk8pwkDLJemLQd4TN3hrphTZWdJY', 'Player 1'),
-                    (10002, 'rHMqT7UtJigHFGayDQPakyLFZRMaoQsvT9', 'Player 2'),
-                    (10003, 'rUm7vyyTs4yNpKfFqcRhHa9edDkoDnNKnR', 'Player 3');
+                    (10001, 'rEALPVCk8pwkDLJemLQd4TN3hrphTZWdJY', 'John Smith'),
+                    (10002, 'rHMqT7UtJigHFGayDQPakyLFZRMaoQsvT9', 'Emily Johnson'),
+                    (10003, 'rUm7vyyTs4yNpKfFqcRhHa9edDkoDnNKnR', 'Alex Rodriguez'),
+                    (10004, 'rGatWop2JKuD9seKnLjoBvJRSS81ye6NJ3', 'Sarah Thompson'),
+                    (10005, 'rGKzjS2ichPAA37qAjJfkPB4KcGC8XuDo1', 'David Lee'),
+                    (10006, 'rLFk3DTmGN4rSSqBkqpQyu7gXaFWVeXNFW', 'Jessica Martinez'),
+                    (10007, 'rG4HDrfn5SGS4P9S5Bpu411iRjQbZdK79H', 'Michael Brown');
             `);
 
 

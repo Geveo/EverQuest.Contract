@@ -123,6 +123,33 @@ export class AccountsService {
         }
     }
 
+    async GetPlayerName() {
+        let resObj = {};
+
+        let filter = {
+            XRP_Address: this.#message.data.XRP_Address,
+        }
+        console.log("Getting player name: ", filter);
+        try {
+            this.#dbContext.open();
+            let rows = await this.#dbContext.getValues("Player", filter);
+
+            if (rows.length > 0) {
+                resObj.success = rows[0].Name;
+            }
+            else {
+                resObj.success = 0;
+            }
+            console.log("Player Name: ", resObj);
+            return resObj;
+
+        } catch (error) {
+            throw error;
+        } finally {
+            this.#dbContext.close();
+        }
+    }
+
     async AddTransactionRecord() {
         let resObj = {};
 
@@ -194,7 +221,6 @@ export class AccountsService {
 
         let filter = {
             Player_ID: this.#message.data.Player_ID,
-            Game_ID: this.#message.data.Game_ID,
         }
         console.log("Getting transaction record: ", filter);
         try {

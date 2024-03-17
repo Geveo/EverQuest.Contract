@@ -22,11 +22,17 @@ export class AccountsController {
                 case constants.AccountsRequestSubTypes.GET_PLAYER_ID:
                     return await this.#service.GetPlayerID();
                     break; 
+                case constants.AccountsRequestSubTypes.GET_PLAYER_NAME:
+                    return await this.#service.GetPlayerName();
+                    break; 
                 case constants.AccountsRequestSubTypes.ADD_FUNDS_TRANSACTIONS:
                     return await this.#service.AddTransactionRecord();
                     break;
-                case constants.AccountsRequestSubTypes.GET_TRANSACTION_HISTORY:
-                    return await this.#service.GetTransactionHistory();
+                case constants.AccountsRequestSubTypes.GET_TRANSACTION_STATUS:
+                    return await this.#service.GetTransactionStatus();
+                    break;
+                case constants.AccountsRequestSubTypes.UPDATE_TRANSACTION_RECORD:
+                    return await this.#service.UpdateTransactionRecord();
                     break;
                 default:
                     break;

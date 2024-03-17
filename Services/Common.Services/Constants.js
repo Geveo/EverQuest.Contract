@@ -11,8 +11,11 @@ const RequestTypes = {
 const AccountsRequestSubTypes = { 
     IS_ACCOUNT_EXIST: "IsAccountExist",
     GET_PLAYER_ID: "GetPlayerID",
+    GET_PLAYER_NAME: "GetPlayerName",
     ADD_FUNDS_TRANSACTIONS: "AddFundsTransactions",
     GET_TRANSACTION_HISTORY: "GetTransactionHistory",
+    GET_TRANSACTION_STATUS: "GetTransactionStatus",
+    UPDATE_TRANSACTION_RECORD: "UpdateTransactionRecord",
     CREATE_ADMIN: "CreateAdmin", 
     DELETE_ADMIN: "DeleteAdmin", 
     UPDATE_ADMIN: "UpdateAdmin", 
