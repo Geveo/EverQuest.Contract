@@ -216,6 +216,35 @@ export class AccountsService {
         }
     }
 
+    async GetTransactionRecord() {
+        let resObj = {};
+
+        let filter = {
+            Player_ID: this.#message.data.Player_ID,
+            Game_ID: this.#message.data.Game_ID,
+        }
+        console.log("Getting transaction record: ", filter);
+        try {
+            this.#dbContext.open();
+            let rows = await this.#dbContext.getValues("Funds_Transactions ", filter);
+
+            if (rows.length > 0) {
+                resObj.success = true;
+                resObj.data = rows[0];
+            }
+            else {
+                resObj.success = false;
+            }
+            console.log("Transaction record: ", resObj);
+            return resObj;
+
+        } catch (error) {
+            throw error;
+        } finally {
+            this.#dbContext.close();
+        }
+    }
+
     async GetTransactionHistory() {
         let resObj = {};
 

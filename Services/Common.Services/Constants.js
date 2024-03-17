@@ -15,6 +15,7 @@ const AccountsRequestSubTypes = {
     ADD_FUNDS_TRANSACTIONS: "AddFundsTransactions",
     GET_TRANSACTION_HISTORY: "GetTransactionHistory",
     GET_TRANSACTION_STATUS: "GetTransactionStatus",
+    GET_TRANSACTION_RECORD: "GetTransactionRecord",
     UPDATE_TRANSACTION_RECORD: "UpdateTransactionRecord",
     CREATE_ADMIN: "CreateAdmin", 
     DELETE_ADMIN: "DeleteAdmin", 
