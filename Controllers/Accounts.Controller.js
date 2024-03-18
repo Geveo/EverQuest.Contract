@@ -37,6 +37,9 @@ export class AccountsController {
                 case constants.AccountsRequestSubTypes.UPDATE_TRANSACTION_RECORD:
                     return await this.#service.UpdateTransactionRecord();
                     break;
+                case constants.AccountsRequestSubTypes.GET_TRANSACTION_HISTORY:
+                    return await this.#service.GetTransactionHistory();
+                    break;
                 default:
                     break;
             }
