@@ -12,15 +12,9 @@ export class DBInitializer {
             // Drop table if exists
             await this.#runQuery(`DROP TABLE IF EXISTS Account;`);
             await this.#runQuery(`DROP TABLE IF EXISTS Admin;`);
-            await this.#runQuery(`DROP TABLE IF EXISTS Consumer;`);
-            await this.#runQuery(`DROP TABLE IF EXISTS Food_Processor;`);
-            await this.#runQuery(`DROP TABLE IF EXISTS Consumer_Review;`);
-            await this.#runQuery(`DROP TABLE IF EXISTS Supplier_Request;`);
-            await this.#runQuery(`DROP TABLE IF EXISTS Certification_Type;`);
-            await this.#runQuery(`DROP TABLE IF EXISTS Certification;`);
-            await this.#runQuery(`DROP TABLE IF EXISTS External_Suppliers;`);
+            await this.#runQuery(`DROP TABLE IF EXISTS Player;`);
             await this.#runQuery(`DROP TABLE IF EXISTS Funds_Transactions;`);
-
+            await this.#runQuery(`DROP TABLE IF EXISTS Total_Winnings;`);
 
             // Create table ContractVersion
             await this.#runQuery(`CREATE TABLE IF NOT EXISTS ContractVersion (
@@ -47,7 +41,7 @@ export class DBInitializer {
                 FOREIGN KEY (XRP_Address) REFERENCES Account(XRP_Address)
             );`);
 
-            // Create table Consumer
+            // Create table Player
             await this.#runQuery(`CREATE TABLE IF NOT EXISTS Player (
                 Player_ID INTEGER PRIMARY KEY,
                 XRP_Address TEXT NOT NULL,
@@ -66,69 +60,14 @@ export class DBInitializer {
                 FOREIGN KEY (Player_ID) REFERENCES Player(Player_ID)
             );`);
 
-            // Create table FoodProcessor
-            /*await this.#runQuery(`CREATE TABLE IF NOT EXISTS Food_Processor (
-                Food_Processor_ID INTEGER PRIMARY KEY AUTOINCREMENT,
-                Account_ID INTEGER NOT NULL,
-                Business_Name TEXT NOT NULL,
-                BR_Number TEXT NOT NULL,
-                Location TEXT NOT NULL,
-                Contact TEXT NOT NULL,
-                Rating REAL NOT NULL,
-                Products TEXT,
-                Referral_Code TEXT,
-                FOREIGN KEY (Account_ID) REFERENCES Account(Account_ID)
+            // Create Total_winnings table
+            await this.#runQuery(`CREATE TABLE IF NOT EXISTS Total_Winnings (
+                Player_ID INTEGER NOT NULL,
+                Game_ID INTEGER NOT NULL,
+                Winning_Amount TEXT NOT NULL,
+                Date TEXT  NOT NULL,
+                FOREIGN KEY (Player_ID) REFERENCES Player(Player_ID)
             );`);
-
-            // Create table Consumer_Review
-            await this.#runQuery(`CREATE TABLE IF NOT EXISTS Consumer_Review (
-                Review_ID INTEGER PRIMARY KEY AUTOINCREMENT,
-                Food_Processor_ID INTEGER NOT NULL,
-                Consumer_ID INTEGER,
-                Comment TEXT,
-                Rating REAL,
-                FOREIGN KEY (Food_Processor_ID) REFERENCES Food_Processor(Food_Processor_ID),
-                FOREIGN KEY (Consumer_ID) REFERENCES Consumer(Consumer_ID)
-            );`);
-
-
-            // Create table Supplier_Request
-            await this.#runQuery(`CREATE TABLE IF NOT EXISTS Supplier_Request (
-                Request_ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-                Food_Processor_ID INTEGER NOT NULL,
-                Supplier_ID INTEGER NOT NULL,
-                Admin_Approval_Status BOOLEAN DEFAULT FALSE,
-                Supplier_Approval_Status BOOLEAN DEFAULT FALSE,
-                Admin_Reject_Comment TEXT,
-                Supplier_Reject_Comment TEXT,
-                FOREIGN KEY (Food_Processor_ID) REFERENCES Food_Processor(Food_Processor_ID),
-                FOREIGN KEY (Supplier_ID) REFERENCES Food_Processor(Food_Processor_ID)
-            );`);
-
-            // Create table Certification_Type
-            await this.#runQuery(`CREATE TABLE IF NOT EXISTS Certification_Type (
-                Type_ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-                Name TEXT NOT NULL,
-                Rating REAL NOT NULL
-            );`);
-
-            // Create table Certification
-            await this.#runQuery(`CREATE TABLE IF NOT EXISTS Certification (
-                Certification_ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-                Food_Processor_ID INTEGER NOT NULL,
-                Type_ID INTEGER NOT NULL,
-                Weight INTEGER NOT NULL,
-                Exp_Date INTEGER NOT NULL,
-                FOREIGN KEY (Food_Processor_ID) REFERENCES Food_Processor(Food_Processor_ID),
-                FOREIGN KEY (Type_ID) REFERENCES Certification_Type(Type_ID)
-            );`);
-
-
-            // Create table External_Suppliers
-            await this.#runQuery(`CREATE TABLE IF NOT EXISTS External_Suppliers (
-                Supplier_ID INTEGER PRIMARY KEY AUTOINCREMENT,
-                BR_Number TEXT
-            );`);*/
 
             await this.#runQuery(`
                 INSERT INTO Account (Public_Key, XRP_Address, Role) VALUES

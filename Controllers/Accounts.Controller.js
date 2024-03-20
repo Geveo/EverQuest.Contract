@@ -40,6 +40,12 @@ export class AccountsController {
                 case constants.AccountsRequestSubTypes.GET_TRANSACTION_HISTORY:
                     return await this.#service.GetTransactionHistory();
                     break;
+                case constants.AccountsRequestSubTypes.ADD_TOTAL_WINNING_RECORD:
+                    return await this.#service.AddTotalWinningRecord();
+                    break;
+                case constants.AccountsRequestSubTypes.GET_TOTAL_WINNING_RECORD:
+                    return await this.#service.GetTotalWinnings();
+                    break;
                 default:
                     break;
             }

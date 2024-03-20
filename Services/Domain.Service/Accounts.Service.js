@@ -302,5 +302,64 @@ export class AccountsService {
         }
     }
 
+    async AddTotalWinningRecord() {
+        let resObj = {};
+
+        try {
+            this.#dbContext.open();
+
+            const fundTranferData = {
+                Player_ID: this.#message.data.Player_ID,
+                Game_ID: this.#message.data.Game_ID,
+                Date: this.#message.data.Date,
+                Winning_Amount: this.#message.data.Winning_Amount,
+            };
+            console.log("Creating a total winning record: ", fundTranferData);
+            var fundTranfers = [fundTranferData];
+            const changes = (await this.#dbContext.insertValuesWithParams("Total_Winnings", fundTranfers)).changes;
+
+            if (changes > 0) {
+                resObj.success = true;
+            }
+            else {
+                resObj.success = false;
+            }
+            console.log("Added transaction: ", resObj);
+            return resObj;
+        } catch (error) {
+            throw error;
+        } finally {
+            this.#dbContext.close();
+        }
+    }
+
+    async GetTotalWinnings() {
+        let resObj = {};
+
+        let filter = {
+            Player_ID: this.#message.data.Player_ID,
+        }
+        console.log("Getting total winnings: ", filter);
+        try {
+            this.#dbContext.open();
+            let rows = await this.#dbContext.getValues("Total_Winnings ", filter);
+
+            if (rows.length > 0) {
+                resObj.success = true;
+                resObj.data = rows;
+            }
+            else {
+                resObj.success = false;
+            }
+            console.log("Total Winnings: ", resObj);
+            return resObj;
+
+        } catch (error) {
+            throw error;
+        } finally {
+            this.#dbContext.close();
+        }
+    }
+
 }
 
